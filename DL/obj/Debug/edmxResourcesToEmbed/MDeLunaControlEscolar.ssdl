@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MDeLunaControlEscolarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AlumnoMateria">
+    <Key>
+      <PropertyRef Name="IdAlumnoMateria" />
+    </Key>
+    <Property Name="IdAlumnoMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdAlumno" Type="int" />
+    <Property Name="IdMateria" Type="int" />
+  </EntityType>
+  <EntityType Name="AlumnoMateriaCalificacion">
+    <Key>
+      <PropertyRef Name="IdAlumnoMateriaCalificacion" />
+    </Key>
+    <Property Name="IdAlumnoMateriaCalificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdAlumno" Type="int" />
+    <Property Name="IdMateria" Type="int" />
+    <Property Name="Calificacion" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Alumnos">
+    <Key>
+      <PropertyRef Name="IdAlumno" />
+    </Key>
+    <Property Name="IdAlumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" />
+    <Property Name="FechaNacimiento" Type="date" />
+    <Property Name="CURP" Type="varchar" MaxLength="50" />
+    <Property Name="IdRol" Type="int" />
+  </EntityType>
+  <EntityType Name="Materia">
+    <Key>
+      <PropertyRef Name="IdMateria" />
+    </Key>
+    <Property Name="IdMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Costo" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Creditos" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Profesor">
+    <Key>
+      <PropertyRef Name="IdProfesor" />
+    </Key>
+    <Property Name="IdProfesor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" />
+    <Property Name="FechaNacimiento" Type="date" />
+    <Property Name="CURP" Type="varchar" MaxLength="20" />
+    <Property Name="RFC" Type="varchar" MaxLength="20" />
+    <Property Name="IdRol" Type="int" />
+  </EntityType>
+  <EntityType Name="ProfesorMateria">
+    <Key>
+      <PropertyRef Name="IdProfesorMateria" />
+    </Key>
+    <Property Name="IdProfesorMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdProfesor" Type="int" />
+    <Property Name="IdMateria" Type="int" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__AlumnoMat__IdAlu__403A8C7D">
+    <End Role="Profesor" Type="Self.Profesor" Multiplicity="0..1" />
+    <End Role="AlumnoMateriaCalificacion" Type="Self.AlumnoMateriaCalificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesor">
+        <PropertyRef Name="IdProfesor" />
+      </Principal>
+      <Dependent Role="AlumnoMateriaCalificacion">
+        <PropertyRef Name="IdAlumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AlumnoMat__IdMat__412EB0B6">
+    <End Role="Materia" Type="Self.Materia" Multiplicity="0..1" />
+    <End Role="AlumnoMateriaCalificacion" Type="Self.AlumnoMateriaCalificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materia">
+        <PropertyRef Name="IdMateria" />
+      </Principal>
+      <Dependent Role="AlumnoMateriaCalificacion">
+        <PropertyRef Name="IdMateria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Alumnos__IdRol__398D8EEE">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="Alumnos">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Profesor__IdRol__38996AB5">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="Profesor">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProfesorM__IdMat__3D5E1FD2">
+    <End Role="Materia" Type="Self.Materia" Multiplicity="0..1" />
+    <End Role="ProfesorMateria" Type="Self.ProfesorMateria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materia">
+        <PropertyRef Name="IdMateria" />
+      </Principal>
+      <Dependent Role="ProfesorMateria">
+        <PropertyRef Name="IdMateria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProfesorM__IdPro__3C69FB99">
+    <End Role="Profesor" Type="Self.Profesor" Multiplicity="0..1" />
+    <End Role="ProfesorMateria" Type="Self.ProfesorMateria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesor">
+        <PropertyRef Name="IdProfesor" />
+      </Principal>
+      <Dependent Role="ProfesorMateria">
+        <PropertyRef Name="IdProfesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Alumnos">
+    <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1" />
+    <End Role="AlumnoMateria" Type="Self.AlumnoMateria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumnos">
+        <PropertyRef Name="IdAlumno" />
+      </Principal>
+      <Dependent Role="AlumnoMateria">
+        <PropertyRef Name="IdAlumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Materia">
+    <End Role="Materia" Type="Self.Materia" Multiplicity="0..1" />
+    <End Role="AlumnoMateria" Type="Self.AlumnoMateria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materia">
+        <PropertyRef Name="IdMateria" />
+      </Principal>
+      <Dependent Role="AlumnoMateria">
+        <PropertyRef Name="IdMateria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AlumnoAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+    <Parameter Name="FechaNacimiento" Type="varchar" Mode="In" />
+    <Parameter Name="CURP" Type="varchar" Mode="In" />
+    <Parameter Name="IdRol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AlumnoDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdAlumno" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AlumnoGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="AlumnoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdAlumno" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AlumnoMateriaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdAlumno" Type="int" Mode="In" />
+    <Parameter Name="IdMateria" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AlumnoMateriaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdAlumnoMateria" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AlumnoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdAlumno" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+    <Parameter Name="FechaNacimiento" Type="varchar" Mode="In" />
+    <Parameter Name="CURP" Type="varchar" Mode="In" />
+    <Parameter Name="IdRol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MateriaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Costo" Type="decimal" Mode="In" />
+    <Parameter Name="Creditos" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="MateriaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdMateria" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MateriaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="MateriaGetAsignados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdAlumno" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MateriaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdMateria" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MateriaGetNoAsignado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdAlumno" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MateriaUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdMateria" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Costo" Type="decimal" Mode="In" />
+    <Parameter Name="Creditos" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="RolesGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="MDeLunaControlEscolarModelStoreContainer">
+    <EntitySet Name="AlumnoMateria" EntityType="Self.AlumnoMateria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AlumnoMateriaCalificacion" EntityType="Self.AlumnoMateriaCalificacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profesor" EntityType="Self.Profesor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfesorMateria" EntityType="Self.ProfesorMateria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AlumnoMat__IdAlu__403A8C7D" Association="Self.FK__AlumnoMat__IdAlu__403A8C7D">
+      <End Role="Profesor" EntitySet="Profesor" />
+      <End Role="AlumnoMateriaCalificacion" EntitySet="AlumnoMateriaCalificacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AlumnoMat__IdMat__412EB0B6" Association="Self.FK__AlumnoMat__IdMat__412EB0B6">
+      <End Role="Materia" EntitySet="Materia" />
+      <End Role="AlumnoMateriaCalificacion" EntitySet="AlumnoMateriaCalificacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Alumnos__IdRol__398D8EEE" Association="Self.FK__Alumnos__IdRol__398D8EEE">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Alumnos" EntitySet="Alumnos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Profesor__IdRol__38996AB5" Association="Self.FK__Profesor__IdRol__38996AB5">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Profesor" EntitySet="Profesor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProfesorM__IdMat__3D5E1FD2" Association="Self.FK__ProfesorM__IdMat__3D5E1FD2">
+      <End Role="Materia" EntitySet="Materia" />
+      <End Role="ProfesorMateria" EntitySet="ProfesorMateria" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProfesorM__IdPro__3C69FB99" Association="Self.FK__ProfesorM__IdPro__3C69FB99">
+      <End Role="Profesor" EntitySet="Profesor" />
+      <End Role="ProfesorMateria" EntitySet="ProfesorMateria" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Alumnos" Association="Self.fk_Alumnos">
+      <End Role="Alumnos" EntitySet="Alumnos" />
+      <End Role="AlumnoMateria" EntitySet="AlumnoMateria" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Materia" Association="Self.fk_Materia">
+      <End Role="Materia" EntitySet="Materia" />
+      <End Role="AlumnoMateria" EntitySet="AlumnoMateria" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

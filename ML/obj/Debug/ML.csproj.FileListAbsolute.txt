@@ -1,0 +1,5 @@
+C:\Users\digis\Documents\Manuel De Luna Casillas\MDeLunaControlEscolar\ML\bin\Debug\ML.dll
+C:\Users\digis\Documents\Manuel De Luna Casillas\MDeLunaControlEscolar\ML\bin\Debug\ML.pdb
+C:\Users\digis\Documents\Manuel De Luna Casillas\MDeLunaControlEscolar\ML\obj\Debug\ML.dll
+C:\Users\digis\Documents\Manuel De Luna Casillas\MDeLunaControlEscolar\ML\obj\Debug\ML.pdb
+C:\Users\digis\Documents\Manuel De Luna Casillas\MDeLunaControlEscolar\ML\obj\Debug\ML.csprojResolveAssemblyReference.cache

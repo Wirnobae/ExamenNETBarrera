@@ -1,0 +1,167 @@
+﻿@model ML.Alumno
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>ALUMNO</h2>
+            <h5> INGRESE LOS DATOS DEL ALUMNO</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            @using (Html.BeginForm("Form", "Alumno", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.IdAlumno, new { @class = "hidden" })
+                            @Html.TextBoxFor(model => model.IdAlumno, new { @class = "hidden form-control", autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.IdAlumno)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Nombre,new { @class = "", @id = "lblNombre" })
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "return SoloLetras(this)" })
+                            @Html.LabelFor(model => model.Nombre, new { @class = "text-danger", @style = "display:none", @id = "lblErrorNombre" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.ApellidoPaterno, "Apellido Paterno", new { @class = "", @id = "lblApellidoPaterno" })
+                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno", @onkeypress = "return SoloLetras(this)" })
+                            @Html.LabelFor(model => model.ApellidoPaterno, new { @class = "text-danger", @style = "display:none", @id = "lblErrorApellidoPaterno" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.ApellidoMaterno, "Apellido Materno", new { @class = "", @id = "lblApellidoMaterno" })
+                            @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno", @onkeypress = "return SoloLetras(this)" })
+                            @Html.LabelFor(model => model.ApellidoMaterno, new { @class = "text-danger", @style = "display:none", @id = "lblErrorApellidoMaterno" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.FechaNacimiento)
+                            <div class="form-inline">
+                                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id = "txtFechaNacimiento" })
+                                @Html.ValidationMessageFor(model => model.FechaNacimiento, null, new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.CURP, "CURP", new { @class = "", @id = "lblCURP" })
+                            @Html.TextBoxFor(model => model.CURP, new { @class = "form-control"})
+                            @Html.LabelFor(model => model.CURP, new { @class = "text-danger", @style = "display:none", @id = "lblCURP" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Roles.IdRol, "Tipo de Rol")
+
+                            @Html.DropDownListFor(model => model.Roles.IdRol, new SelectList(Model.Roles.Rols, "IdRol", "Nombre"), "Selecciona un Rol", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Roles.IdRol)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.UserName, "Nombre de Usuario", new { @class = "", @id = "lblCURP" })
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control"})
+                            @Html.LabelFor(model => model.UserName, new { @class = "text-danger", @style = "display:none"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Password, "Contraseña", new { @class = "", @id = "lblCURP" })
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control"})
+                            @Html.LabelFor(model => model.Password, new { @class = "text-danger", @style = "display:none"})
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+                            @Html.ActionLink("Regresar", "GetAll", "Alumno", htmlAttributes: new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+<script src="../../Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    function SoloLetras(e) {
+        var letra = e.onkeypress.arguments[0].key;
+        if (!/[^a-zA-Z]/.test(letra)) {
+            $("#lblErrorNombre").hide();
+            return true;
+        }
+        else {
+            if (e.id == "txtNombre") {
+                $("#lblErrorNombre").text('Solo se aceptan letras');
+                $('#lblErrorNombre').css('display', 'block');
+            }
+            else
+                if (e.id == "txtApellidoPaterno") {
+                    $("#lblErrorApellidoPaterno").text('Solo se aceptan letras');
+                    $('#lblErrorApellidoPaterno').css('display', 'block');
+                    //    $("#lblErrorNombre").show();
+                }
+                else
+                    if (e.id == "txtApellidoMaterno") {
+                        $("#lblErrorApellidoMaterno").text('Solo se aceptan letras');
+                        $('#lblErrorApellidoMaterno').css('display', 'block');
+                    }
+                    else
+                        if (e.id == "txtCURP") {
+                            $("#lblCURP").text('Solo se aceptan letras');
+                            $('#lblCURP').css('display', 'block');
+                        }
+            return false;
+        }
+    }
+
+
+    var j = jQuery.noConflict();
+    j(function () {
+        j("#txtFechaNacimiento").datepicker({
+            dateFormat: 'dd-mm-yy',
+            showOn: 'button',
+            buttonImage: "../Imagen/icono.jpg",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true
+        });
+        $(".ui-datepicker-trigger").css("width", "30px");
+        $(".ui-datepicker-trigger").css("height", "30px");
+    });
+
+</script>

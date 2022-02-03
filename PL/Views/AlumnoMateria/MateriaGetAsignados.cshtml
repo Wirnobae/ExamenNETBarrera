@@ -1,0 +1,126 @@
+﻿@model ML.AlumnoMateria
+@{
+    ViewBag.Title = "MateriaGetAsignados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Materias Asignadas</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4>Seleccione ( + ) para asignar materias al alumno y ( x ) para eliminar una materia</h4>
+                    </div>
+                </div>
+
+               <div class="row">
+                   <div class="col-lg-12">
+                       <div class="form-group hidden">
+                           @Html.LabelFor(model => model.Alumno.IdAlumno, new { @class = "control-label col-md-2 hidden" })
+                           <div class="col-md-3">
+                               @Html.TextBoxFor(model => model.Alumno.IdAlumno, new { @class = "form-control hidden", @readonly = true })
+                               @Html.ValidationMessageFor(model => model.Alumno.IdAlumno)
+
+                           </div>
+                       </div>
+                       <div class="form-group">
+                           <div class="row">
+                               <div class="col-md-3">
+                                   @Html.LabelFor(model => model.Alumno.Nombre, new { @class = "control-label" })
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-3">
+                                   @Html.TextBoxFor(model => model.Alumno.Nombre, new { @class = "form-control", @ReadOnly = "True" })
+                                   @Html.ValidationMessageFor(model => model.Alumno.Nombre)
+                                   
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-3">
+                                   @Html.LabelFor(model => model.Alumno.ApellidoPaterno, "Apellido Paterno", new { @class = "control-label" })
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-3">
+                                   @Html.TextBoxFor(model => model.Alumno.ApellidoPaterno, new { @class = "form-control", @ReadOnly = "True" })
+                                   @Html.ValidationMessageFor(model => model.Alumno.ApellidoPaterno)
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-3">
+                                   @Html.LabelFor(model => model.Alumno.ApellidoMaterno, "Apellido Materno", new { @class = "control-label" })
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-3">
+                                   @Html.TextBoxFor(model => model.Alumno.ApellidoMaterno, new { @class = "form-control", @ReadOnly = "True" })
+                                   @Html.ValidationMessageFor(model => model.Alumno.ApellidoMaterno)
+                               </div>
+                           </div>
+                           <br />
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <a href="@Url.Action("MateriaGetNoAsignados", "AlumnoMateria", Model.Alumno) ">
+                                       <img style="height: 40px; width: 40px;" align="right" src="~/img/agregar.PNG" />
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+                <br/>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                       
+                                    <td>IdAlumno</td>
+                                    <td>IdMateria</td>
+                                    <td>Nombre</td>
+                                    <td>Apellido Paterno</td>
+                                    <td>Apellido Materno</td>
+                                    <td>NombreMateria</td>
+                                    <td>Eliminar</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    
+                                @foreach (ML.AlumnoMateria alumnoMateria in Model.AlumnoMaterias)
+                                {
+                                    <tr>
+                                        <td>@alumnoMateria.IdAlumno</td>
+                                        <td>@alumnoMateria.IdMateria</td>
+                                        <td>@alumnoMateria.Alumno.Nombre</td>
+                                        <td>@alumnoMateria.Alumno.ApellidoPaterno</td>
+                                        <td>@alumnoMateria.Alumno.ApellidoMaterno</td>
+                                        <td>@alumnoMateria.Materia.Nombre</td>
+                                        <td><a class="btn btn-danger glyphicon glyphicon-remove" href="@Url.Action("Delete", "AlumnoMateria", new { IdAlumnoMateria = alumnoMateria.IdAlumnoMateria , IdAlumno= alumnoMateria.IdAlumno })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                                    </tr>
+                                     @*<tr>
+                                    <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("MateriaGetNoAsignados", "AlumnoMateria", new { IdAlumno = alumnoMateria.IdAlumno })"></a></td>>
+                                    </tr>*@
+                        
+                        
+                                }
+                   
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <center>
+                    <br />
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.ActionLink("Regresar", "GetAll", "AlumnoMateria", htmlAttributes: new { @class = "btn btn-danger btn-block" })
+                            </div>
+                        </div>
+                </center>
+
+
+
+            </div>

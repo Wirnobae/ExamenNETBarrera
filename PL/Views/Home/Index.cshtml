@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>BIENVENIDO</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>ALUMNO</h2>
+        <p>
+            En el siguiente link podras visualizar la tabla Alumno
+        </p>
+        <p><a class="btn btn-warning" href="@Url.Action("GetAll", "Alumno")">Next &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>MATERIA</h2>
+        <p>En el siguiente link podras visualizar la tabla Materia</p>
+        <p><a class="btn btn-warning" href="@Url.Action("GetAll", "Materia")">Next &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>ALUMNOMATERIA</h2>
+        <p>En el siguiente link podras visualizar la tabla AlumnoMateria</p>
+        <p><a class="btn btn-success" href="@Url.Action("GetAll", "AlumnoMateria")">Next &raquo;</a></p>
+    </div>
+</div>

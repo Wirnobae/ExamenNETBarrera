@@ -1,0 +1,130 @@
+﻿@model ML.Materia
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>MATERIA</h2>
+            <h5> INGRESE LOS DATOS DE LA MATERIA</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            @using (Html.BeginForm("Form", "Materia", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.IdMateria, new { @class = "hidden" })
+                            @Html.TextBoxFor(model => model.IdMateria, new { @class = "hidden form-control", autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.IdMateria)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Nombre, new { @class = "", @id = "lblNombre" })
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "return SoloLetras(this)" })
+                            @Html.ValidationMessageFor(model => model.Nombre,null, new { @class = "text-danger", @style = "display:none", @id = "lblErrorNombre" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Costo)
+                            @Html.TextBoxFor(model => model.Costo, "{0:#.#}", new { @class = "form-control txtCosto", @id = "txtCosto", @onkeypress = "return SoloNumeros(this)" })
+                            @Html.ValidationMessageFor(model => model.Costo, null, new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.Costo, new { @class = "text-danger", @style = "display:none", @id = "lblErrorCosto" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Creditos)
+                            @Html.TextBoxFor(model => model.Creditos, "{0:#.#}", new { @class = "form-control txtCreditos", @id = "txtCreditos", @onkeypress = "return Numeros(this)" })
+                            @Html.ValidationMessageFor(model => model.Creditos, null, new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.Creditos, new { @class = "text-danger", @style = "display:none", @id = "lblErrorCreditos" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+                            @Html.ActionLink("Regresar", "GetAll", "Materia", htmlAttributes: new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../../Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    function SoloLetras(e) {
+        var letra = e.onkeypress.arguments[0].key;
+        if (/^[^0-9]+$/g.test(letra)) {
+            $("#lblErrorNombre").hide();
+            return true;
+        }
+        else {
+            if (e.id == "txtNombre") {
+                $("#lblErrorNombre").text('Solo se aceptan letras');
+                $('#lblErrorNombre').css('display', 'block');
+            }
+            return false;
+        }
+    }
+
+    function SoloNumeros(e) {
+        var letra = e.onkeypress.arguments[0].key;
+        if (!/[^0-9]/g.test(letra)) {
+            $("#lblErrorCosto").hide();
+            return true;
+        }
+        else {
+            if (e.id == "txtCosto") {
+                $("#lblErrorCosto").text('Solo se aceptan Numeros');
+                $('#lblErrorCosto').css('display', 'block');
+            }
+            return false;
+
+        }
+    }
+
+    function Numeros(e) {
+        var letra = e.onkeypress.arguments[0].key;
+        if (!/[^0-9]/g.test(letra)) {
+            $("#lblErrorCreditos").hide();
+            return true;
+        }
+        else {
+            if (e.id == "txtCreditos") {
+                $("#lblErrorCreditos").text('Solo se aceptan Numeros');
+                $('#lblErrorCreditos').css('display', 'block');
+            }
+            return false;
+
+        }
+    }
+
+    </script>

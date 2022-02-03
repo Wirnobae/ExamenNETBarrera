@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9fde9d191b00416cbf4fe8f3b0a4e912" Name="Diagram1">
+        <EntityTypeShape EntityType="MDeLunaControlEscolarModel.AlumnoMateria" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MDeLunaControlEscolarModel.Alumno" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MDeLunaControlEscolarModel.Materia" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="MDeLunaControlEscolarModel.fk_Alumnos" ManuallyRouted="false" />
+        <AssociationConnector Association="MDeLunaControlEscolarModel.fk_Materia" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MDeLunaControlEscolarModel.AlumnoMateriaCalificacion" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="MDeLunaControlEscolarModel.Profesor" Width="1.5" PointX="3" PointY="7.75" />
+        <EntityTypeShape EntityType="MDeLunaControlEscolarModel.ProfesorMateria" Width="1.5" PointX="5.25" PointY="6.5" />
+        <EntityTypeShape EntityType="MDeLunaControlEscolarModel.Role" Width="1.5" PointX="0.75" PointY="1.375" />
+        <AssociationConnector Association="MDeLunaControlEscolarModel.FK__AlumnoMat__IdAlu__403A8C7D" />
+        <AssociationConnector Association="MDeLunaControlEscolarModel.FK__AlumnoMat__IdMat__412EB0B6" />
+        <AssociationConnector Association="MDeLunaControlEscolarModel.FK__Alumnos__IdRol__398D8EEE" />
+        <AssociationConnector Association="MDeLunaControlEscolarModel.FK__ProfesorM__IdMat__3D5E1FD2" />
+        <AssociationConnector Association="MDeLunaControlEscolarModel.FK__Profesor__IdRol__38996AB5" />
+        <AssociationConnector Association="MDeLunaControlEscolarModel.FK__ProfesorM__IdPro__3C69FB99" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
